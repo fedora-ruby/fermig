@@ -13,6 +13,7 @@ options[:interactive] = ARGV.include? '-i'
 ARGV.clear
 
 problematic_packages = []
+quit = false
 
 packages = `#{PACKAGES}`
 exit $?.to_i if $?.to_i != 0
@@ -36,17 +37,22 @@ packages.lines do |package|
       if options[:interactive]
         system 'git show HEAD'
 
-        puts "Keep the changes [Y/n]?"
+        puts "Revert the changes or quit [y/N/q]?"
         keep = gets.chomp
 
-        if keep =~ /^n$/i
+        case keep
+        when /^y$/i
           problematic_packages << package
           git_hash = last_git_log_entry[/^(.*?) .*/, 1]
           `git reset --hard #{git_hash}`
+        when /^q$/i
+          quit = true
         end
       end
     end
   end
+
+  break if quit
 end
 
 if options[:interactive] && problematic_packages.size > 0
