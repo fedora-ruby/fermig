@@ -21,6 +21,8 @@ exit $?.to_i if $?.to_i != 0
 packages.lines do |package|
   package.chomp!
 
+  print "Converting #{package} ... "
+
   package_dir = File.join(Dir.pwd, package)
 
   `fedpkg clone #{package}` unless File.exist? package_dir
@@ -49,7 +51,11 @@ packages.lines do |package|
         if keep =~ /q/i
           quit = true
         end
+      else
+        puts "done"
       end
+    else
+      puts "skipped"
     end
   end
 
@@ -57,8 +63,7 @@ packages.lines do |package|
 end
 
 if options[:interactive] && problematic_packages.size > 0
-  puts "Problematic packages:"
-  puts "====================="
-  puts "\n"
+  puts "Reverted packages:"
+  puts "=================="
   puts problematic_packages
 end
