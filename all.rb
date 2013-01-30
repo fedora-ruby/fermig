@@ -40,12 +40,13 @@ packages.lines do |package|
         puts "Revert the changes or quit [y/N/q]?"
         keep = gets.chomp
 
-        case keep
-        when /^y$/i
+        if keep =~ /y/i
           problematic_packages << package
           git_hash = last_git_log_entry[/^(.*?) .*/, 1]
           `git reset --hard #{git_hash}`
-        when /^q$/i
+        end
+
+        if keep =~ /q/i
           quit = true
         end
       end
