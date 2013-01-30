@@ -9,11 +9,11 @@ COMMIT_MESSAGE = %{Rebuild for https://fedoraproject.org/wiki/Features/Ruby_2.0.
 
 options = {}
 options[:interactive] = ARGV.include? '-i'
+options[:build] = ARGV.include? '-b'
 
 ARGV.clear
 
 problematic_packages = []
-quit = false
 
 packages = `#{PACKAGES}`
 exit $?.to_i if $?.to_i != 0
@@ -22,6 +22,9 @@ packages.lines do |package|
   package.chomp!
 
   print "Converting #{package} ... "
+
+  revert = false
+  quit = false
 
   package_dir = File.join(Dir.pwd, package)
 
@@ -39,20 +42,23 @@ packages.lines do |package|
       if options[:interactive]
         system 'git show HEAD'
 
-        puts "Revert the changes or quit [y/N/q]?"
+        puts "Revert changes, quit or continue [r/q/C]?"
         answer = gets.chomp
 
-        if answer =~ /y/i
-          problematic_packages << package
-          git_hash = last_git_log_entry[/^(.*?) .*/, 1]
-          `git reset --hard #{git_hash}`
-        end
+        revert = answer =~ /r/i
+        quit = answer =~ /q/i
+      end
 
-        if answer =~ /q/i
-          quit = true
-        end
+      if revert
+        problematic_packages << package
+        git_hash = last_git_log_entry[/^(.*?) .*/, 1]
+        `git reset --hard #{git_hash}`
+      elsif options[:build]
+        puts '', 'Issuing build:'
+        `git push`
+        puts `fedpkg build --nowait --scratch`
       else
-        puts "done"
+        puts "done" unless options[:interactive]
       end
     else
       puts "skipped"
