@@ -13,6 +13,9 @@ ARGF.lines do |line|
     # Configuration flags are part of install macro now.
     next if line =~ /export CONFIGURE_ARGS="--with-cflags='%{optflags}'"/
 
+    # .%{gem_dir} is created by %gem_install macro now.
+    next if line =~ /mkdir -p \.(\/)?%{gem_dir}/
+
     # Drop the hard coded ruby(abi) dependency.
     line.gsub!(/(ruby.*?abi.*?) .*=.*/, '\1')
     line.chomp!
