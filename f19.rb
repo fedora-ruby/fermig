@@ -6,7 +6,7 @@ gem_install = false
 ARGF.lines do |line|
   changelog ||= line =~ /%changelog/
 
-  unless changelog
+  unless changelog or line =~ /\s*#/
     # Remove the rubyabi macro definition.
     next if line =~ /%global.*?ruby.*?abi/
 
