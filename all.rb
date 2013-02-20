@@ -31,9 +31,9 @@ packages.lines do |package|
   `fedpkg clone #{package}` unless File.exist? package_dir
 
   Dir.chdir package_dir do
-    last_git_log_entry = `git log --oneline -1`.chomp
+    git_log = `git log --oneline -10`.chomp
 
-    unless last_git_log_entry =~ /#{COMMIT_MESSAGE}/
+    unless git_log =~ /#{COMMIT_MESSAGE}/
       `#{UPDATE} "#{package}.spec"`
 
       `git add -u`
@@ -51,7 +51,7 @@ packages.lines do |package|
 
       if revert
         problematic_packages << package
-        git_hash = last_git_log_entry[/^(.*?) .*/, 1]
+        git_hash = git_log[/^(.*?) .*/, 1]
         `git reset --hard #{git_hash}`
       elsif options[:build]
         puts '', 'Issuing build:'
