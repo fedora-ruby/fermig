@@ -24,6 +24,9 @@ ARGF.lines do |line|
     # Rename ruby(abi) to ruby(release).
     line.gsub!(/(ruby.*?)abi(.*?)/, '\1release\2')
 
+    # Rename %{gem_extdir} to %{gem_extdir_mri}.
+    line.gsub!(/%{gem_extdir}/, '%{gem_extdir_mri}')
+
     # Replace custom 'gem install' command with %gem_install macro.
     if line =~ /gem\s*install.*/
       pre = line[/(.*)gem\s*install.*/, 1]
