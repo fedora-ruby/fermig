@@ -31,13 +31,16 @@ ARGF.lines do |line|
     if line =~ /gem\s*install.*/
       pre = line[/(.*)gem\s*install.*/, 1]
       gem_name ||= line[/%{SOURCE.*}/,0]
-      while line =~ /\\$/
+      install_dir ||= line =~ /%{buildroot}/
+      while line =~ /\\\s*/
         line = gets
         gem_name ||= line[/%{SOURCE.*}/,0]
+        install_dir ||= line =~ /%{buildroot}/
       end
 
       line = "#{pre}%gem_install"
       line += " -n #{gem_name}" if gem_name
+      line += " -d %{buildroot}%{gem_dir}" if install_dir
     end
   end
 
