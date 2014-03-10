@@ -1,5 +1,5 @@
 #!/usr/bin/ruby
 
-COMMENT = %{Rebuild for https://fedoraproject.org/wiki/Features/Ruby_2.0.0}
+COMMENT = %{Rebuilt for https://fedoraproject.org/wiki/Changes/Ruby_2.1}
 
 `rpmdev-bumpspec -c "#{COMMENT}" "#{ARGV[0]}"`
