@@ -16,8 +16,8 @@ ARGF.each_line do |line|
 
     # Simplify binary extensions.
     line.gsub!(/(mkdir -p %{buildroot}%{gem_extdir_mri}).*/, '\1')
-    line.gsub!(/mv %{buildroot}%{gem_libdir}\/.*\.so.*/, \
-      "cp -pa .%{gem_extdir_mri}/* %{buildroot}%{gem_extdir_mri}/")
+    line.gsub!(/mv %{buildroot}%{gem_(inst|lib)dir}\/.*\.so.*/, \
+      "cp -a .%{gem_extdir_mri}/* %{buildroot}%{gem_extdir_mri}/")
   end
 
   puts line
