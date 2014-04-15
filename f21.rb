@@ -17,7 +17,7 @@ ARGF.each_line do |line|
     # Simplify binary extensions.
     line.gsub!(/(mkdir -p %{buildroot}%{gem_extdir_mri}).*/, '\1')
     line.gsub!(/mv %{buildroot}%{gem_(inst|lib)dir}\/.*\.so.*/, \
-      "cp -a .%{gem_extdir_mri}/* %{buildroot}%{gem_extdir_mri}/\n\n" +
+      "cp -a .%{gem_extdir_mri}/{gem.build_complete,*.so} %{buildroot}%{gem_extdir_mri}/\n\n" +
       "# Prevent dangling symlink in -debuginfo.\n" +
       "rm -rf %{buildroot}%{gem_instdir}/ext\n")
 
