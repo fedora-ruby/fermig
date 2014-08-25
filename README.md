@@ -9,7 +9,7 @@ Usage
 ````
 # Clone this repo.
 cd ~/dev
-git clone git://github.com/voxik/fermig
+git clone git://github.com/fedora-ruby/fermig
 
 # Run update.rb on your spec file.
 cd fermig
