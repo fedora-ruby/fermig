@@ -5,7 +5,7 @@ ROOT = File.expand_path(File.dirname(__FILE__))
 PACKAGES = File.join ROOT, 'packages.rb'
 UPDATE = File.join ROOT, 'update.rb'
 
-COMMIT_MESSAGE = %{Rebuilt for https://fedoraproject.org/wiki/Changes/Ruby_2.1}
+COMMIT_MESSAGE = %{Rebuilt for https://fedoraproject.org/wiki/Changes/Ruby_2.2}
 
 options = {}
 options[:interactive] = ARGV.include? '-i'
