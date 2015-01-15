@@ -2,7 +2,7 @@
 
 ROOT = File.expand_path(File.dirname(__FILE__))
 
-F21 = File.join ROOT, 'f21.rb'
+F21 = File.join ROOT, 'f22.rb'
 CHANGELOG = File.join ROOT, 'changelog.rb'
 
 modified = `#{F21} "#{ARGV[0]}"`
