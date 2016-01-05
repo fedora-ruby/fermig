@@ -2,10 +2,10 @@
 
 ROOT = File.expand_path(File.dirname(__FILE__))
 
-F21 = File.join ROOT, 'f22.rb'
+FEDORA = File.join ROOT, 'f24.rb'
 CHANGELOG = File.join ROOT, 'changelog.rb'
 
-modified = `#{F21} "#{ARGV[0]}"`
+modified = `#{FEDORA} "#{ARGV[0]}"`
 File.open(ARGV[0], "w") { |f| f.puts modified }
 
 `#{CHANGELOG} "#{ARGV[0]}"`

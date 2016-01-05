@@ -5,7 +5,7 @@ ROOT = File.expand_path(File.dirname(__FILE__))
 PACKAGES = File.join ROOT, 'packages.rb'
 UPDATE = File.join ROOT, 'update.rb'
 
-COMMIT_MESSAGE = %{Rebuilt for https://fedoraproject.org/wiki/Changes/Ruby_2.2}
+COMMIT_MESSAGE = %{Rebuilt for https://fedoraproject.org/wiki/Changes/Ruby_2.3}
 
 options = {}
 options[:interactive] = ARGV.include? '-i'
@@ -31,6 +31,7 @@ packages.lines do |package|
   `fedpkg clone #{package}` unless File.exist? package_dir
 
   Dir.chdir package_dir do
+    `git pull`
     git_log = `git log --oneline -10`.chomp
 
     unless git_log =~ /#{COMMIT_MESSAGE}/
