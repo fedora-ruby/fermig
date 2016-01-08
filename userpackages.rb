@@ -4,21 +4,20 @@ ROOT = File.expand_path(File.dirname(__FILE__))
 
 PACKAGES = File.join ROOT, 'packages.rb'
 
-userpackages = `pkgdb-cli list --user "$USER"`
+user_packages = `pkgdb-cli list --user "$USER"`
 exit $?.to_i if $?.to_i != 0
 
-userpackages = userpackages.lines
+user_packages = user_packages.lines
 
-userpackages.map! { |pkg| pkg.lstrip.split(' ')[0] + "\n" }
+user_packages.map! { |pkg| pkg.lstrip.split(' ')[0] + "\n" }
 
 packages = `#{PACKAGES}`
 exit $?.to_i if $?.to_i != 0
 
-userpackages &= packages.lines
+user_packages &= packages.lines
 
-userpackages.sort!
-userpackages.uniq!
-userpackages.compact!
-userpackages.delete('\n')
+user_packages.sort!
+user_packages.uniq!
+user_packages.delete("\n")
 
-puts userpackages
+puts user_packages
