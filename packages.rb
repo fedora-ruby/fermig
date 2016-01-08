@@ -8,9 +8,9 @@ packages = `dnf repoquery -q --disablerepo='*' --enablerepo=rawhide-source --arc
 exit $?.to_i if $?.to_i != 0
 
 packages = packages.lines
-packages.compact!
 packages.uniq!
 packages.sort!
+packages.delete("\n")
 
 packages = packages - IGNORED_PACKAGES
 
