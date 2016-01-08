@@ -31,6 +31,7 @@ packages.lines do |package|
   `fedpkg clone #{package}` unless File.exist? package_dir
 
   Dir.chdir package_dir do
+    `git checkout master`
     `git pull`
     git_log = `git log --oneline -10`.chomp
 
