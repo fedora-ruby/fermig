@@ -18,6 +18,5 @@ user_packages &= packages.lines
 
 user_packages.sort!
 user_packages.uniq!
-user_packages.delete("\n")
 
 puts user_packages

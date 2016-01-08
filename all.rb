@@ -3,7 +3,7 @@
 ROOT = File.expand_path(File.dirname(__FILE__))
 
 PACKAGES = File.join ROOT, 'packages.rb'
-USERPACKAGES = File.join ROOT, 'userpackages.rb'
+USER_PACKAGES = File.join ROOT, 'user_packages.rb'
 UPDATE = File.join ROOT, 'update.rb'
 
 COMMIT_MESSAGE = %{Rebuilt for https://fedoraproject.org/wiki/Changes/Ruby_2.3}
@@ -17,7 +17,7 @@ ARGV.clear
 
 problematic_packages = []
 
-packages = options[:user] ? `#{USERPACKAGES}` : `#{PACKAGES}`
+packages = options[:user] ? `#{USER_PACKAGES}` : `#{PACKAGES}`
 exit $?.to_i if $?.to_i != 0
 
 packages.lines do |package|
