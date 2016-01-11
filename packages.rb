@@ -11,7 +11,7 @@ packages = packages.lines
 packages.map!(&:strip)
 packages.uniq!
 packages.sort!
-packages.delete("\n")
+packages.delete('')
 
 packages = packages - IGNORED_PACKAGES
 
