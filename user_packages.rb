@@ -9,7 +9,7 @@ exit $?.to_i if $?.to_i != 0
 
 user_packages = user_packages.lines
 
-user_packages.map! { |pkg| pkg.lstrip.split(' ')[0] + "\n" }
+user_packages.map! { |pkg| "#{pkg[/^\s+([\w\-_]+)\s+/, 1]}\n" }
 
 packages = `#{PACKAGES}`
 exit $?.to_i if $?.to_i != 0
