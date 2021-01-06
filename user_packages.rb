@@ -14,7 +14,7 @@ page = String.new(PKGS_API_URL)
 user_packages = []
 
 while page do
-  json = JSON.parse(open(page).read)
+  json = JSON.parse(URI.open(page).read)
 
   page = json.dig('pagination', 'next')
 
