@@ -7,7 +7,7 @@ ROOT = File.expand_path(File.dirname(__FILE__))
 
 PACKAGES = File.join ROOT, 'packages.rb'
 
-PKGS_API_URL = "https://src.fedoraproject.org/api/0/projects?username=#{ENV['USER']}"
+PKGS_API_URL = "https://src.fedoraproject.org/api/0/projects?username=#{ENV['USER']}&fork=false"
 
 page = String.new(PKGS_API_URL)
 
