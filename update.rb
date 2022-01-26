@@ -2,7 +2,7 @@
 
 ROOT = File.expand_path(File.dirname(__FILE__))
 
-FEDORA = File.join ROOT, 'f34.rb'
+FEDORA = File.join ROOT, 'f36.rb'
 CHANGELOG = File.join ROOT, 'changelog.rb'
 
 modified = `#{FEDORA} "#{ARGV[0]}"`
