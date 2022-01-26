@@ -4,6 +4,7 @@ ROOT = File.expand_path(File.dirname(__FILE__))
 
 PACKAGES = File.join ROOT, 'packages.rb'
 USER_PACKAGES = File.join ROOT, 'user_packages.rb'
+IGNORED = File.join ROOT, 'ignored.rb'
 UPDATE = File.join ROOT, 'update.rb'
 
 COMMIT_MESSAGE = %{Rebuilt for https://fedoraproject.org/wiki/Changes/Ruby_3.1}
@@ -22,6 +23,13 @@ exit $?.to_i if $?.to_i != 0
 
 packages.lines do |package|
   package.chomp!
+
+  `#{IGNORED} "#{package}"`
+  ignored = $?.success?
+  if ignored
+    puts "Ignoring #{package} ... "
+    next
+  end
 
   print "Converting #{package} ... "
 
