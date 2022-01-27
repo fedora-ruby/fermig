@@ -24,14 +24,14 @@ exit $?.to_i if $?.to_i != 0
 packages.lines do |package|
   package.chomp!
 
+  puts "* Converting #{package} ..."
+
   `#{IGNORED} "#{package}"`
   ignored = $?.success?
   if ignored
-    puts "Ignoring #{package} ... "
+    puts "ignored"
     next
   end
-
-  print "Converting #{package} ... "
 
   revert = false
   quit = false
