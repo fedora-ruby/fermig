@@ -49,7 +49,7 @@ packages.lines do |package|
       `#{UPDATE} "#{package}.spec"`
 
       `git add -u`
-      `git commit -m "#{COMMIT_MESSAGE}"`
+      `git commit -m "#{COMMIT_MESSAGE}" --allow-empty`
 
       if options[:interactive]
         system 'git show HEAD'
