@@ -41,6 +41,11 @@ packages.lines do |package|
   `fedpkg clone #{package}` unless File.exist? package_dir
 
   Dir.chdir package_dir do
+    unless `git log rawhide --grep="#{COMMIT_MESSAGE}" --oneline`.chomp.empty?
+      puts "skipped"
+      next
+    end
+
     `git checkout rawhide`
     `git pull`
     git_log = `git log --oneline -10`.chomp
