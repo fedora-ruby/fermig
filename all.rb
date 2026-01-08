@@ -7,7 +7,7 @@ USER_PACKAGES = File.join ROOT, 'user_packages.rb'
 IGNORED = File.join ROOT, 'ignored.rb'
 UPDATE = File.join ROOT, 'update.rb'
 
-COMMIT_MESSAGE = %{Rebuilt for https://fedoraproject.org/wiki/Changes/Ruby_3.4}
+COMMIT_MESSAGE = %{Rebuilt for https://fedoraproject.org/wiki/Changes/Ruby_4.0}
 
 options = {}
 options[:interactive] = ARGV.include? '-i'
